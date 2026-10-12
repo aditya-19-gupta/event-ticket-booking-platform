@@ -31,10 +31,12 @@ async function login(req,res){
 
         const accessToken=jwt.sign({id:data._id.toString(),role:data.role},process.env.ACCESS_TOKEN,{expiresIn:"1h"});
 
+  
+
         const refreshToken=jwt.sign({id:data._id.toString(),tokenType:"refresh"},process.env.REFRESH_TOKEN,{expiresIn:"7d"});
     
 
-        data.refresToken=refreshToken;
+        data.refreshToken=refreshToken;
         await data.save();
 
         return res.status(200).json({

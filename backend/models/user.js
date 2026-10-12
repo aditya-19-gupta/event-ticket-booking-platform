@@ -32,7 +32,7 @@ const userscheme=new mongoose.Schema({
         enum: ["active", "blocked"],
         default: "active",
     },
-    refresToken:{
+    refreshToken:{
         type:String,
         default:null,
     },
