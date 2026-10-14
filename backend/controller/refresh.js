@@ -12,14 +12,12 @@ async function refresh(req,res){
             return res.status(401).json({message:"invalid token"});
         }
 
-        console.log("Refresh secret loaded:", !!process.env.REFRESH_TOKEN);
 
 
 
         let decode=jwt.verify(token,process.env.REFRESH_TOKEN);
 
 
-        console.log("decode");
         if(decode.tokenType !== "refresh"){
             return res.status(401).json({message:"Invalid token"});
         }
@@ -50,7 +48,7 @@ async function refresh(req,res){
         });
     }
     catch(err){
-        console.log(err.message);
+        console.log(err);
         return res.status(500).json({message:"Internal server error"});;
     }
 }

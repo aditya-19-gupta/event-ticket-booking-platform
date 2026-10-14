@@ -1,7 +1,7 @@
 const user=require("../models/user");
 async function register(req,res){
     try{
-        const {username,password,email}=req.body;
+        const {username,password,email,role}=req.body;
 
         if(!username||!email||!password){
             return res.status(400).json({message:"Username, email and password require!!"});
@@ -23,6 +23,7 @@ async function register(req,res){
             username:username,
             password:password,
             email:email,
+            role:role,
         });
 
         return res.status(200).json({message:"registration completed",User:{
