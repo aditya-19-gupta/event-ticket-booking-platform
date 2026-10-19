@@ -1,0 +1,8 @@
+const express=require("express");
+const router=express.Router();
+const verify = require("../middleware/auth");
+const authorize = require("../middleware/authorize");
+const Create_seat=require("../controller/create_seats");
+
+router.post("/:id",verify,authorize("organizer"),Create_seat);
+module.exports=router;

@@ -9,6 +9,10 @@ const create_event = require("./routes/create_event");
 const get_event = require("./routes/get_event");
 const update = require("./routes/update_event");
 const Delete = require("./routes/delete_event");
+const seat=require("./routes/create_seats");
+const getSeat = require("./routes/get_seats");
+const updatePrice = require("./routes/update_price");
+const delete_seat = require("./routes/delete_seat");
 const app=express();
 const port=8000;
 
@@ -28,6 +32,10 @@ async function startserver(){
     app.use("/getEvent",get_event);
     app.use("/update",update);
     app.use("/delete",Delete);
+    app.use("/createSeat",seat);
+    app.use("/getSeat",getSeat);
+    app.use("/updateprice",updatePrice);
+    app.use("/delete_seat",delete_seat)
 
     app.listen(port,()=>{
     console.log("server started");
