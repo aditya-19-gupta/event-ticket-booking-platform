@@ -13,6 +13,9 @@ const seat=require("./routes/create_seats");
 const getSeat = require("./routes/get_seats");
 const updatePrice = require("./routes/update_price");
 const delete_seat = require("./routes/delete_seat");
+const hold = require("./routes/hold_seat");
+const checkout = require("./routes/checkout");
+const getBooking = require("./routes/getBooking");
 const app=express();
 const port=8000;
 
@@ -35,7 +38,10 @@ async function startserver(){
     app.use("/createSeat",seat);
     app.use("/getSeat",getSeat);
     app.use("/updateprice",updatePrice);
-    app.use("/delete_seat",delete_seat)
+    app.use("/delete_seat",delete_seat);
+    app.use("/Booking",hold);
+    app.use("/checkout",checkout)
+    app.use("/getBooking",getBooking)
 
     app.listen(port,()=>{
     console.log("server started");

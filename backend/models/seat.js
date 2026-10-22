@@ -30,6 +30,15 @@ const seatSchema = new mongoose.Schema({
         type: String,
         enum: ["available", "held", "sold"],
         default: "available"
+    },
+    heldBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
+    },
+    holdExpiresAt: {
+        type: Date,
+        default: null
     }
 });
 
