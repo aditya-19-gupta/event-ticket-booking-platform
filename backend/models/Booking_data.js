@@ -30,6 +30,11 @@ const bookingSchema = new mongoose.Schema({
                 type: Number,
                 required: true,
                 min: 0
+            },
+            status:{
+                type:String,
+                enum:["Booked","Cancelled","Pending"],
+                default:"Pending",
             }
         }
     ],
@@ -50,6 +55,16 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         enum: ["pending", "paid", "failed", "refunded"],
         default: "pending"
+    },
+    refundedAmount: {
+        type: Number,
+        default: 0,
+        min: 0
+    },
+    refundstatus:{
+        type:String,
+        enum:["successfull","pending","failed"],
+        default:null
     }
 
 }, { timestamps: true });

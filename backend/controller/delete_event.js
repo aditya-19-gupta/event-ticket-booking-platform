@@ -1,5 +1,6 @@
 const event = require("../models/event");
 const mongoose = require("mongoose");
+const { redis } = require("../config/redis");
 
 async function Delete(req, res){
     try {
@@ -33,7 +34,9 @@ async function Delete(req, res){
         if(!User_delete){
             return res.status(404).json({message:"event Not deleted"});
         }
-
+        
+        await redis.del("event:published");
+        await redis.del(`event:${id}`);
         return res.status(200).json({message:"event Deleted"});
     }
     catch(err){

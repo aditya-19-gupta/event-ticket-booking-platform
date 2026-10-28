@@ -16,6 +16,8 @@ const delete_seat = require("./routes/delete_seat");
 const hold = require("./routes/hold_seat");
 const checkout = require("./routes/checkout");
 const getBooking = require("./routes/getBooking");
+const cancel_seat = require("./routes/cancel_seat");
+const { connectRedis } = require("./config/redis");
 const app=express();
 const port=8000;
 
@@ -24,7 +26,7 @@ const port=8000;
 
 async function startserver(){
     await connectDB();
-    
+    await connectRedis();
     app.use(express.json());
 
     app.use("/register",register);
@@ -40,8 +42,9 @@ async function startserver(){
     app.use("/updateprice",updatePrice);
     app.use("/delete_seat",delete_seat);
     app.use("/Booking",hold);
-    app.use("/checkout",checkout)
-    app.use("/getBooking",getBooking)
+    app.use("/checkout",checkout);
+    app.use("/getBooking",getBooking);
+    app.use("/cancelseat",cancel_seat)
 
     app.listen(port,()=>{
     console.log("server started");

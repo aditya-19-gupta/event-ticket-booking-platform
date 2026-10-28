@@ -1,7 +1,7 @@
 
 const event = require("../models/event");
 const mongoose = require("mongoose");
-
+const {redis}=require("../config/redis");
 async function update(req, res) {
     try {
         const id = req.params.id;
@@ -59,6 +59,9 @@ async function update(req, res) {
             },
             { new: true, runValidators: true }
         );
+        await redis.del(`event${id}`);
+        await redis.del("event:published");
+
 
         return res.status(200).json({
             message: "Event updated successfully",
