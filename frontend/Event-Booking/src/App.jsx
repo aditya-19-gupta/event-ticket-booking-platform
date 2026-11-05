@@ -1,23 +1,29 @@
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-import Home from "../pages/home.jsx";
-import Login from "../pages/login.jsx"
-import Register from "../pages/register.jsx"
-import Navbar from "./components/navbar";
+import Home from "./pages/home";
+import Login from "./pages/login";
+import Register from "./pages/Register";
+import Navbar from "./components/Navbar";
 
 function App() {
-    return (
-        <BrowserRouter>
+  const [token, setToken] = useState(null);
 
-            <Navbar />
+  return (
+    <BrowserRouter>
+      <Navbar token={token} setToken={setToken} />
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
+      <Routes>
+        <Route path="/" element={<Home token={token} />} />
 
-        </BrowserRouter>
-    );
+        <Route
+          path="/login"
+          element={<Login setToken={setToken} />}
+        />
+
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

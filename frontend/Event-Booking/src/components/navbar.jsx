@@ -1,29 +1,32 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ token, setToken }) {
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        setToken(null);
+        navigate("/");
+    }
+
     return (
-        <nav>
+        <nav className="navbar">
             <h2>Event Booking</h2>
 
-            <NavLink to="/">Home</NavLink>
+            <div className="navbar-links">
+                <NavLink to="/">Home</NavLink>
 
-            <NavLink
-                to="/login"
-                style={({ isActive }) => ({
-                    color: isActive ? "red" : "black"
-                })}
-            >
-                Login
-            </NavLink>
-
-            <NavLink
-                to="/register"
-                style={({ isActive }) => ({
-                    color: isActive ? "red" : "black"
-                })}
-            >
-                Register
-            </NavLink>
+                {token ? (
+                    <button onClick={handleLogout}>
+                        Logout
+                    </button>
+                ) : (
+                    <>
+                        <NavLink to="/login">Login</NavLink>
+                        <NavLink to="/register">Register</NavLink>
+                    </>
+                )}
+            </div>
         </nav>
     );
 }
