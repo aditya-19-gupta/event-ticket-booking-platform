@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express=require("express");
 const connectDB = require("./config/db");
+const cors = require("cors");
 const register = require("./routes/register");
 const login = require("./routes/login");
 const refresh = require("./routes/refresh");
@@ -18,6 +19,7 @@ const checkout = require("./routes/checkout");
 const getBooking = require("./routes/getBooking");
 const cancel_seat = require("./routes/cancel_seat");
 const { connectRedis } = require("./config/redis");
+const helmet =require("helmet");
 const app=express();
 const port=8000;
 
@@ -27,8 +29,11 @@ const port=8000;
 async function startserver(){
     await connectDB();
     await connectRedis();
+    app.use(cors({origin: "http://localhost:5173"}));    
     app.use(express.json());
-
+    app.use(helmet());
+    
+app.use(express.json());
     app.use("/register",register);
     app.use("/login",login);
     app.use("/refresh",refresh);
